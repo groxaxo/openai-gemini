@@ -146,6 +146,39 @@ The most notable of these is [`thinking_config`](https://ai.google.dev/gemini-ap
 
 For more details, refer to the [Gemini API docs](https://ai.google.dev/gemini-api/docs/openai#extra-body).
 
+
+## Text-to-Speech (TTS)
+
+The `/v1/audio/speech` endpoint provides OpenAI-compatible text-to-speech functionality powered by Gemini's TTS models.
+
+### Example Usage
+
+```bash
+curl https://your-endpoint.com/v1/audio/speech \
+  -H "Authorization: Bearer YOUR_GEMINI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "tts-1",
+    "input": "Hello! This is a test of the text-to-speech API.",
+    "voice": "alloy",
+    "response_format": "mp3"
+  }' \
+  --output speech.mp3
+```
+
+### Model Mapping
+- `tts-1` → `gemini-2.5-flash-preview-tts` (faster, optimized for speed)
+- `tts-1-hd` → `gemini-2.5-pro-preview-tts` (higher quality)
+
+### Voice Mapping
+OpenAI voices are mapped to Gemini TTS voices:
+- `alloy` → Puck (neutral, balanced)
+- `echo` → Charon (male voice)
+- `fable` → Kore (expressive)
+- `onyx` → Fenrir (deep, authoritative)
+- `nova` → Aoede (warm, friendly)
+- `shimmer` → Aoede (similar to nova)
+
 ---
 
 ## Supported API endpoints and applicable parameters
