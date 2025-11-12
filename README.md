@@ -194,3 +194,20 @@ For more details, refer to the [Gemini API docs](https://ai.google.dev/gemini-ap
 - [x] `embeddings`
   - [x] `dimensions`
 - [x] `models`
+- [x] `audio/speech` (Text-to-Speech)
+  <details>
+
+  - [x] `model`
+      - `tts-1` => `gemini-2.5-flash-preview-tts`
+      - `tts-1-hd` => `gemini-2.5-pro-preview-tts`
+      - Can also specify Gemini model names directly
+  - [x] `input` (required)
+  - [x] `voice` (required)
+      - Supported: `alloy`, `echo`, `fable`, `onyx`, `nova`, `shimmer`
+      - Maps to Gemini voices: Puck, Charon, Kore, Fenrir, Aoede
+  - [x] `response_format`
+      - Supported: `mp3`, `opus`, `aac`, `flac`, `wav`, `pcm`
+      - Default: `mp3`
+  - [ ] `speed` (not yet implemented)
+
+  </details>
