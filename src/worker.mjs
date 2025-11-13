@@ -233,27 +233,13 @@ async function handleSpeech (req, apiKey) {
   const audioBytes = Buffer.from(audioData.data, "base64");
 
   // Convert response format if needed
-  const responseFormat = req.response_format || "mp3";
+  // Gemini returns raw PCM audio data (24 kHz, 16-bit, mono)
+  // Only WAV and PCM formats are currently supported
+  const responseFormat = req.response_format || "wav";
   let outputBuffer = audioBytes;
-  let mimeType = "audio/mpeg";
+  let mimeType;
 
-  // Gemini returns PCM by default, we need to convert to the requested format
-  // For now, we'll handle basic formats
   switch (responseFormat) {
-    case "mp3":
-      mimeType = "audio/mpeg";
-      // TODO: Convert PCM to MP3 if needed
-      // For now, return as-is since Gemini may support different output formats
-      break;
-    case "opus":
-      mimeType = "audio/opus";
-      break;
-    case "aac":
-      mimeType = "audio/aac";
-      break;
-    case "flac":
-      mimeType = "audio/flac";
-      break;
     case "wav":
       mimeType = "audio/wav";
       // Convert PCM to WAV format
@@ -261,9 +247,23 @@ async function handleSpeech (req, apiKey) {
       break;
     case "pcm":
       mimeType = "audio/pcm";
+      // Return raw PCM data
       break;
+    case "mp3":
+    case "opus":
+    case "aac":
+    case "flac":
+      throw new HttpError(
+        `Format "${responseFormat}" is not supported. Gemini returns raw PCM audio. ` +
+        `Only "wav" and "pcm" formats are supported. ` +
+        `For other formats, use external conversion tools like ffmpeg.`,
+        400
+      );
     default:
-      mimeType = "audio/mpeg";
+      throw new HttpError(
+        `Unknown response_format: "${responseFormat}". Supported formats: "wav", "pcm"`,
+        400
+      );
   }
 
   return new Response(outputBuffer, {

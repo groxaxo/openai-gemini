@@ -161,9 +161,9 @@ curl https://your-endpoint.com/v1/audio/speech \
     "model": "tts-1",
     "input": "Hello! This is a test of the text-to-speech API.",
     "voice": "alloy",
-    "response_format": "mp3"
+    "response_format": "wav"
   }' \
-  --output speech.mp3
+  --output speech.wav
 ```
 
 ### Model Mapping
@@ -239,8 +239,9 @@ OpenAI voices are mapped to Gemini TTS voices:
       - Supported: `alloy`, `echo`, `fable`, `onyx`, `nova`, `shimmer`
       - Maps to Gemini voices: Puck, Charon, Kore, Fenrir, Aoede
   - [x] `response_format`
-      - Supported: `mp3`, `opus`, `aac`, `flac`, `wav`, `pcm`
-      - Default: `mp3`
+      - Supported: `wav`, `pcm`
+      - Default: `wav`
+      - Note: Gemini returns raw PCM audio (24 kHz, 16-bit, mono). Only WAV (with proper headers) and raw PCM formats are supported. For mp3, opus, aac, or flac, use external conversion tools like ffmpeg.
   - [ ] `speed` (not yet implemented)
 
   </details>
