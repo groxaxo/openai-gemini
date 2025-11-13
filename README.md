@@ -231,17 +231,17 @@ OpenAI voices are mapped to Gemini TTS voices:
   <details>
 
   - [x] `model`
-      - `tts-1` => `gemini-2.5-flash-preview-tts`
-      - `tts-1-hd` => `gemini-2.5-pro-preview-tts`
-      - Can also specify Gemini model names directly
+    - `tts-1` => `gemini-2.5-flash-preview-tts`
+    - `tts-1-hd` => `gemini-2.5-pro-preview-tts`
+    - Can also specify Gemini model names directly
   - [x] `input` (required)
   - [x] `voice` (required)
-      - Supported: `alloy`, `echo`, `fable`, `onyx`, `nova`, `shimmer`
-      - Maps to Gemini voices: Puck, Charon, Kore, Fenrir, Aoede
+    - Supported: `alloy`, `echo`, `fable`, `onyx`, `nova`, `shimmer`
+    - Maps to Gemini voices: Puck, Charon, Kore, Fenrir, Aoede
   - [x] `response_format`
-      - Supported: `wav`, `pcm`
-      - Default: `wav`
-      - Note: Gemini returns raw PCM audio (24 kHz, 16-bit, mono). Only WAV (with proper headers) and raw PCM formats are supported. For mp3, opus, aac, or flac, use external conversion tools like ffmpeg.
+    - Supported: `wav`, `pcm`
+    - Default: `wav`
+    - Note: Gemini returns raw PCM audio (24 kHz, 16-bit, mono). Only WAV (with proper headers) and raw PCM formats are supported. For mp3, opus, aac, or flac, use external conversion tools like ffmpeg.
   - [ ] `speed` (not yet implemented)
 
   </details>
